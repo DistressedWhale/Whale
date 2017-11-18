@@ -11,28 +11,35 @@ import javazoom.jl.player.Player;
 
 public class CancerSounds{
 	
+	private String mp3Url; 
 	
-	public static void main(String[] args)
-	{
-	try {
-		String mp3Url = "https://p.scdn.co/mp3-preview/4e6c03963fa6a6720648540282afc75f4df744c9";
-		URL url = new URL(mp3Url);
-		URLConnection conn = url.openConnection();
-		InputStream is = conn.getInputStream();
+	public CancerSounds(String mp3String) {
 		
-		Player player = new Player(is);
+		mp3Url = mp3String;		
+	}
+	
+	
+	public void play(){
 		
-		player.play();
-		
-	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (JavaLayerException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}}
+		try {
+			URL url = new URL(mp3Url);
+			URLConnection conn = url.openConnection();
+			InputStream is = conn.getInputStream();
+			
+			Player player = new Player(is);
+			
+			player.play();
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JavaLayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
