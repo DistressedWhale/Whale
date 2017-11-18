@@ -6,6 +6,8 @@ package whale.ben;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import whale.sound.HowJSay;
+
 /**
  * @author benwh
  *
@@ -34,7 +36,8 @@ public class Main {
 		MusicThread mt = new MusicThread(q);
 		dt.start();
 		mt.start();
-		
+		HowJSay t = new HowJSay();
+		t.run();
 		
 		while (true){
 		
