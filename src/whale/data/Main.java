@@ -1,7 +1,7 @@
 /**
  * 
  */
-package whale;
+package whale.data;
 
 /**
  * @author benwh
