@@ -1,14 +1,15 @@
 import java.net.*;
 import java.io.*;
-//ID: 1f60082d34864c39b752ace10f5ff00d
-//Secret: b933f2341509494da1a6e878e0338e5e
-//curl -X GET "https://accounts.spotify.com/authorize?client_id=1f60082d34864c39b752ace10f5ff00d&response_type=code&redirect_uri=http://localhost:8888/callback"
-//OAUTH: BQCah9nJ7Zxvq1UpaCggT0jn5Jzf1EVGOeWzOuTsFfbdgdtsqvKIQtdr7CamCwyEuj7ZpMDGw772Exm3KVMTAlDNQwXArsej75dRTHsdd2qKW4X4Lip7TJYDCUPMnAnq-HHTeEb0rUdiSasR
 
 public class NextSong {
+  static final String OAuth = "BQCah9nJ7Zxvq1UpaCggT0jn5Jzf1EVGOeWzOuTsFfbdgdtsqvKIQtdr7CamCwyEuj7ZpMDGw772Exm3KVMTAlDNQwXArsej75dRTHsdd2qKW4X4Lip7TJYDCUPMnAnq-HHTeEb0rUdiSasR";
+  static final String ID = "1f60082d34864c39b752ace10f5ff00d";
+  static final String Secret = "b933f2341509494da1a6e878e0338e5e";
+
   public static String httpGET(String inputURL) throws Exception{
+    HttpURLConnection connection = null;
     URL getURL = new URL(inputURL);
-    URLConnection connection = getURL.openConnection();
+    connection = (HttpURLConnection) getURL.openConnection();
     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
     String inputLine;
