@@ -17,12 +17,13 @@ public class Main {
 	public Double prev;
 	public Double total;
 	public int dataPoints;
+	public BlockingQueue<Double> q;
 	
 	public Main() {
 		prev = 0.0;
 		total = 0.0;
 		dataPoints = 0;
-		
+		q = new LinkedBlockingQueue<Double>();
 		
 	}
 	
@@ -30,14 +31,12 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Main main = new Main();
 		
-		LinkedBlockingQueue<Double> q = new LinkedBlockingQueue<Double>();
 		DataThread dt = new DataThread(q);
-		MusicThread mt = new MusicThread(q);
+		MusicThread mt = new MusicThread(q,main);
 		dt.start();
 		mt.start();
-		HowJSay t = new HowJSay();
-		t.run();
 		
 		while (true){
 		
