@@ -1,18 +1,18 @@
 package whale.ben;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class DataThread extends Thread {
 	private DataInput data;
 	private boolean hasNewData = false;
 	private String[] line;
-	private LinkedBlockingQueue<Double> q;
+	private BlockingQueue<Double> q;
 	
-	public DataThread(LinkedBlockingQueue<Double> q) {
+	public DataThread(Main m) {
 		
 		
 		data = new DataInput();
-		this.q = q;
+		this.q = m.getQueue();
 	}
 
 	public void run() {

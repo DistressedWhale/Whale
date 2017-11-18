@@ -1,13 +1,13 @@
 package whale.ben;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class MusicThread extends Thread {
-	private LinkedBlockingQueue<Double> q;
+	private BlockingQueue<Double> q;
 	private Main main;
 	
-	public MusicThread(LinkedBlockingQueue<Double> q, Main main) {
-		this.q = q;
+	public MusicThread(Main main) {
+		this.q = main.getQueue();
 		this.main = main;
 		
 	}
@@ -19,14 +19,18 @@ public class MusicThread extends Thread {
 	
 	public void run() {
 		
-		System.out.println("retrieved value of" + getChange().toString());
+		while (true){
+			Double val = getChange();
+		System.out.println("retrieved value of" + val.toString());
+		System.out.println("relative value is" + main.computeRelative(val));
 		try {
-			sleep(500);
+			sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			break;
 		}
-		
+		}
 	}
 
 }
