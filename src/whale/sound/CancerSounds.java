@@ -8,7 +8,11 @@ import java.net.URLConnection;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-
+/**
+ * Class that deals with the deadly sound APIs. Construct a Cancersounds object with a url and then run play. Simples.
+ * @author benwh
+ *
+ */
 public class CancerSounds{
 	
 	private String mp3Url; 
