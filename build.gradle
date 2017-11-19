@@ -17,7 +17,5 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.2'
 
-    apply plugin: "eclipse"
-
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
