@@ -46,7 +46,7 @@ public class MusicThread extends Thread {
 
 			    currentSong = new SongMetadata(seeds, previewURL);
 			    } while (!currentSong.previewURL.contains("https://p.scdn.co/mp3-preview"));
-			    
+			    System.out.println("Song Found - beginning playback.");
 			    //System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
 			    //		"Artist seed: " + currentSong.artistSeed + "\n" +
 			    //        "Song seed: " + currentSong.songSeed);
