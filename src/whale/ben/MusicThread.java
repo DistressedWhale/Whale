@@ -23,50 +23,51 @@ public class MusicThread extends Thread {
 	}
 	
 	public void run() {
-        String userInput = "";
-        String info;
-        String previewURL;
-        String[] seeds;
-		String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
-        SongMetadata currentSong = new SongMetadata(initialSeeds, "");
-        NextSong songPicker = new NextSong();
+        try {
+			String userInput = "";
+			String info;
+			String previewURL;
+			String[] seeds;
+			String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
+			SongMetadata currentSong = new SongMetadata(initialSeeds, "");
+			NextSong songPicker = new NextSong();
 
-        
-		while (true){
-			Double val = getChange();
-			System.out.println("retrieved value of" + val.toString());
-			System.out.println("relative value is" + main.computeRelative(val));
-	
-            info = songPicker.giveMeNextSongInfo(currentSong);
-            previewURL = songPicker.stripOutPreviewURL(info);
-            seeds = songPicker.stripOutSeeds(info);
+			
+			while (true){
+				Double val = getChange();
+				System.out.println("retrieved value of" + val.toString());
+				System.out.println("relative value is" + main.computeRelative(val));
 
-            currentSong = new SongMetadata(seeds, previewURL);
+			    info = songPicker.giveMeNextSongInfo(currentSong);
+			    previewURL = songPicker.stripOutPreviewURL(info);
+			    seeds = songPicker.stripOutSeeds(info);
 
-            if (currentSong.previewURL.contains("https://p.scdn.co/mp3-preview")) {
-                System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
-                        "Artist seed: " + currentSong.artistSeed + "\n" +
-                        "Song seed: " + currentSong.songSeed);
+			    currentSong = new SongMetadata(seeds, previewURL);
 
-            CancerSounds player = new CancerSounds(currentSong.previewURL);
-            player.play();
-            
-            }
-        }
-		
-		///
-		
-		
-		
-		
-		
-		try {
-			sleep(30000);
-		} catch (InterruptedException e) {
+			    if (currentSong.previewURL.contains("https://p.scdn.co/mp3-preview")) {
+			        System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
+			                "Artist seed: " + currentSong.artistSeed + "\n" +
+			                "Song seed: " + currentSong.songSeed);
+
+			    CancerSounds player = new CancerSounds(currentSong.previewURL);
+			    player.play();
+			    
+			    }
+			
+			
+			///
+
+			try {
+				sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				break;
+			}
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			break;
-		}
 		}
 	}
 
