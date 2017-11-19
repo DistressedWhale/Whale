@@ -27,7 +27,8 @@ public class MusicThread extends Thread {
 			String info;
 			String previewURL;
 			String[] seeds;
-			String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
+			//String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
+			String[] initialSeeds = {"6XyY86QOPPrYVGvF9ch6wz","60a0Rd6pjrkxjPbaKzXjfq"};
 			SongMetadata currentSong = new SongMetadata(initialSeeds, "");
 			NextSong songPicker = new NextSong();
 

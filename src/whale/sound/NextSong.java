@@ -26,20 +26,20 @@ public class NextSong {
         //Change energy value
         energyValue = (float) ((energyChange - 0.75)*2);
 
-        if (energyValue > 0.8f) {
-            energyValue = 0.8f;
+        if (energyValue > 0.6f) {
+            energyValue = 0.6f;
         } else if (energyValue < 0f) {
             energyValue = 0f;
         }
 
-        Float maxEnergy = energyValue + 0.3f;
+        Float maxEnergy = energyValue + 0.4f;
         if (maxEnergy > 1.0f) {
             maxEnergy = 1.0f;
         }
         if(Double.isNaN(valenceChange)) valenceChange = 0.5;
         valenceValue = valenceChange.floatValue();
-        if (valenceValue > 0.8) valenceValue = 0.8f;
-        Float maxValence = valenceValue + 0.3f;
+        if (valenceValue > 0.6) valenceValue = 0.6f;
+        Float maxValence = valenceValue + 0.4f;
         if (maxValence > 1.0f) {
             maxValence = 1.0f;
         }
@@ -61,7 +61,7 @@ public class NextSong {
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
                 "limit=1&";
-       // System.out.println(myURL);
+        System.out.println(myURL);
         System.out.println("Searching for related, previewable song with values Energy: "+energyValue.toString()+" Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
         
         return Unirest.get(myURL)
