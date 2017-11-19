@@ -27,20 +27,20 @@ public class NextSong {
         //Change energy value
         energyValue = (float) ((energyChange - 0.75)*2);
 
-        if (energyValue > 1.0f) {
-            energyValue = 1.0f;
+        if (energyValue > 0.8f) {
+            energyValue = 0.8f;
         } else if (energyValue < 0f) {
             energyValue = 0f;
         }
 
-        Float maxEnergy = energyValue + 0.1f;
+        Float maxEnergy = energyValue + 0.3f;
         if (maxEnergy > 1.0f) {
             maxEnergy = 1.0f;
         }
         if(Double.isNaN(valenceChange)) valenceChange = 0.5;
         valenceValue = valenceChange.floatValue();
-        
-        Float maxValence = valenceValue + 0.1f;
+        if (valenceValue > 0.8) valenceValue = 0.8f;
+        Float maxValence = valenceValue + 0.3f;
         if (maxValence > 1.0f) {
             maxValence = 1.0f;
         }
@@ -62,8 +62,8 @@ public class NextSong {
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
                 "limit=1&";
-        
-        System.out.println("Energy: "+energyValue.toString()+"Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
+       // System.out.println(myURL);
+       // System.out.println("Energy: "+energyValue.toString()+"Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
         
         return Unirest.get(myURL)
                 .header("Authorization", "Bearer " + OAuth)
@@ -121,7 +121,7 @@ public class NextSong {
 
     //gets the recommended artist and song URLs
     public String[] stripOutSeeds(String inputURL) {
-    	System.out.println(inputURL);
+    	//System.out.println(inputURL);
         //Strip out recommended artist
         int firstHTTPIndex = inputURL.indexOf("\"spotify\" : \"https://open.spotify.com/artist");
         int firstSeedStart = inputURL.indexOf("\"", firstHTTPIndex+10) + 1;
