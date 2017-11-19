@@ -7,8 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import sun.misc.Queue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author benwh
@@ -16,7 +16,7 @@ import sun.misc.Queue;
  */
 public class DataInput {
 	
-	Queue<String[]> dataQueue = new Queue<String[]>();
+	Queue<String[]> dataQueue = new LinkedList<String[]>();
 
 	public DataInput() {
 		
@@ -33,7 +33,7 @@ public class DataInput {
                 // use comma as separator
                 String[] minute = line.split(cvsSplitBy);
 
-                dataQueue.enqueue(minute);
+                dataQueue.add(minute);
 
             }
 
@@ -55,13 +55,7 @@ public class DataInput {
 	
 	public String[] getNextMinute() {
 		
-		try {
-			return dataQueue.dequeue();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		return dataQueue.poll();
 		
 	}
 	

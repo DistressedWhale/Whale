@@ -2,8 +2,6 @@
  * 
  */
 package whale.ben;
-import whale.ben.*;
-
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -84,7 +82,7 @@ public class Main {
 	}
 	public synchronized Double computeRelative(Double current) {
 		
-		if(rolling.size() >= 6) {
+		if(rolling.size() >= 20) {
 			rolling.remove();
 		}
 		rolling.add(total/dataPoints);
