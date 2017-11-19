@@ -121,7 +121,7 @@ public class NextSong {
 
     //gets the recommended artist and song URLs
     public String[] stripOutSeeds(String inputURL) {
-
+    	System.out.println(inputURL);
         //Strip out recommended artist
         int firstHTTPIndex = inputURL.indexOf("\"spotify\" : \"https://open.spotify.com/artist");
         int firstSeedStart = inputURL.indexOf("\"", firstHTTPIndex+10) + 1;
