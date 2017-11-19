@@ -1,6 +1,11 @@
 package whale.ben;
 
+import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
+
+import whale.sound.CancerSounds;
+import whale.sound.NextSong;
+import whale.sound.SongMetadata;
 
 public class MusicThread extends Thread {
 	private BlockingQueue<Double> q;
@@ -18,11 +23,43 @@ public class MusicThread extends Thread {
 	}
 	
 	public void run() {
-		
+        String userInput = "";
+        String info;
+        String previewURL;
+        String[] seeds;
+		String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
+        SongMetadata currentSong = new SongMetadata(initialSeeds, "");
+        NextSong songPicker = new NextSong();
+
+        
 		while (true){
 			Double val = getChange();
-		System.out.println("retrieved value of" + val.toString());
-		System.out.println("relative value is" + main.computeRelative(val));
+			System.out.println("retrieved value of" + val.toString());
+			System.out.println("relative value is" + main.computeRelative(val));
+	
+            info = songPicker.giveMeNextSongInfo(currentSong);
+            previewURL = songPicker.stripOutPreviewURL(info);
+            seeds = songPicker.stripOutSeeds(info);
+
+            currentSong = new SongMetadata(seeds, previewURL);
+
+            if (currentSong.previewURL.contains("https://p.scdn.co/mp3-preview")) {
+                System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
+                        "Artist seed: " + currentSong.artistSeed + "\n" +
+                        "Song seed: " + currentSong.songSeed);
+
+            CancerSounds player = new CancerSounds(currentSong.previewURL);
+            player.play();
+            
+            }
+        }
+		
+		///
+		
+		
+		
+		
+		
 		try {
 			sleep(30000);
 		} catch (InterruptedException e) {
@@ -33,4 +70,9 @@ public class MusicThread extends Thread {
 		}
 	}
 
+	public void playSong(String url) {
+		
+		CancerSounds c = new CancerSounds(url);
+		c.play();
+	}
 }
