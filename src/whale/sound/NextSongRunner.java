@@ -1,3 +1,5 @@
+package whale.sound;
+
 import java.util.Scanner;
 
 public class NextSongRunner {

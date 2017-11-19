@@ -3,9 +3,7 @@ package whale.ben;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 
-import whale.sound.CancerSounds;
-import whale.sound.NextSong;
-import whale.sound.SongMetadata;
+import whale.sound.*;
 
 public class MusicThread extends Thread {
 	private BlockingQueue<Double> q;
