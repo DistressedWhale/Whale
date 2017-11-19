@@ -20,7 +20,7 @@ public class DataThread extends Thread {
 		while(true) {
 		line = data.getNextMinute();
 		try {
-			q.put(Double.parseDouble(line[4]));
+			q.put(Double.parseDouble(line[4])-2700.0);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

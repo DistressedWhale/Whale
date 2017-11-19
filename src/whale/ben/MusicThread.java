@@ -31,14 +31,16 @@ public class MusicThread extends Thread {
 			SongMetadata currentSong = new SongMetadata(initialSeeds, "");
 			NextSong songPicker = new NextSong();
 
-			
+			Double mode;
 			while (true){
 				Double val = getChange();
-				System.out.println("retrieved value of" + val.toString());
-				System.out.println("relative value is" + main.computeRelative(val));
-
+				Double rel = main.computeRelative(val);
+				System.out.println("Decimal percent change of " + val.toString());
+				//System.out.println("relative value is" + main.computeRelative(val));
+				if(val < 1) mode = 0.0;
+				else mode = 1.0;
 			    do {
-				info = songPicker.giveMeNextSongInfo(currentSong);
+				info = songPicker.giveMeNextSongInfo(currentSong, val, rel, mode);
 			    previewURL = songPicker.stripOutPreviewURL(info);
 			    seeds = songPicker.stripOutSeeds(info);
 

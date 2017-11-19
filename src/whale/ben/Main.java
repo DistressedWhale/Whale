@@ -22,8 +22,8 @@ public class Main {
 	public Double ans;
 	
 	public Main() {
-		prev = 2749.0;
-		total = 2749.0;
+		prev = 43.0;
+		total = 43.0;
 		dataPoints = 1;
 		this.q = new LinkedBlockingQueue<Double>();
 		this.rolling = new LinkedList<Double>();
@@ -71,11 +71,11 @@ public class Main {
 		if(total != 0) {
 			
 			 ans = (total/dataPoints)/prev; //should give a decimal percent change
-			
-			return ans;
+			 if(Double.isNaN(ans)) return 1.0;
+			 else return ans;
 			
 		} else {
-			return 0.0;
+			return 1.0;
 		}
 		
 		

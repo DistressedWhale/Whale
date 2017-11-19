@@ -32,8 +32,8 @@ public class NextSong {
         } else if (energyValue < 0f) {
             energyValue = 0f;
         }
-
-        valenceValue = valenceValue * valenceChange.floatValue();
+        if(Double.isNaN(valenceChange)) valenceChange = 0.5;
+        valenceValue = valenceChange.floatValue();
 
         if (modeChange >= 1) {
             mode = 1;
@@ -50,7 +50,9 @@ public class NextSong {
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
                 "limit=1&";
-
+        
+        System.out.println("Energy: "+energyValue.toString()+"Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
+        
         return Unirest.get(myURL)
                 .header("Authorization", "Bearer " + OAuth)
                 .header("Accept", "application/json")
