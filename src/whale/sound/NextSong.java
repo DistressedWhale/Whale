@@ -1,5 +1,3 @@
-package whale.sound;
-
 import com.mashape.unirest.http.Unirest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.*;
@@ -13,6 +11,7 @@ public class NextSong {
     private static final String ID = "1f60082d34864c39b752ace10f5ff00d";
     private static final String Secret = "b933f2341509494da1a6e878e0338e5e";
     public static String OAuth;
+
     //bare bones constructor, it only needs to know the first song and artist to get rolling.
     public NextSong() throws Exception {
         OAuth = giveMeAuth();
