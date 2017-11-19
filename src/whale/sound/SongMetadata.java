@@ -1,3 +1,6 @@
+package whale.sound;
+
+
 public class SongMetadata {
     public String artistSeed;
     public String songSeed;
