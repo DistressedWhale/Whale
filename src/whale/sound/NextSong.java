@@ -1,3 +1,5 @@
+package whale.sound;
+
 import com.mashape.unirest.http.Unirest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.*;
@@ -11,6 +13,9 @@ public class NextSong {
     private static final String ID = "1f60082d34864c39b752ace10f5ff00d";
     private static final String Secret = "b933f2341509494da1a6e878e0338e5e";
     public static String OAuth;
+    public static Float energyValue = 0.5f;
+    public static Float valenceValue = 0.5f;
+    public static int mode = 1;
 
     //bare bones constructor, it only needs to know the first song and artist to get rolling.
     public NextSong() throws Exception {
@@ -18,9 +23,45 @@ public class NextSong {
     }
 
     //Gets the next song, based off a song.
+    public String giveMeNextSongInfo(SongMetadata song, Double energyChange, Double valenceChange, Double modeChange) throws Exception {
+        //Change energy value
+        energyValue = (float) ((energyChange - 0.75)*2);
+
+        if (energyValue > 1.0f) {
+            energyValue = 1.0f;
+        } else if (energyValue < 0f) {
+            energyValue = 0f;
+        }
+
+        valenceValue = valenceValue * valenceChange.floatValue();
+
+        if (modeChange >= 1) {
+            mode = 1;
+        }
+        else {
+            mode = 0;
+        }
+
+        String myURL = "https://api.spotify.com/v1/recommendations?" +
+                "min_energy=" + energyValue.toString() + "&" +
+                "min_valence=" + valenceValue.toString() + "&" +
+                "mode=" + Integer.toString(mode) + "&" +
+                "market=US&" +
+                "seed_tracks=" + song.songSeed + "&" +
+                "seed_artists=" + song.artistSeed + "&" +
+                "limit=1&";
+
+        return Unirest.get(myURL)
+                .header("Authorization", "Bearer " + OAuth)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .asString()
+                .getBody();
+    }
+
     public String giveMeNextSongInfo(SongMetadata song) throws Exception {
         String myURL = "https://api.spotify.com/v1/recommendations?" +
-                "min_energy=0.3&" +
+                "min_energy=" + energyValue.toString() + "&" +
                 "market=US&" +
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
