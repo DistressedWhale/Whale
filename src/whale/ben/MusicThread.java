@@ -47,11 +47,11 @@ public class MusicThread extends Thread {
 			    currentSong = new SongMetadata(seeds, previewURL);
 			    } while (!currentSong.previewURL.contains("https://p.scdn.co/mp3-preview"));
 			    
-			    System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
-			    		"Artist seed: " + currentSong.artistSeed + "\n" +
-			            "Song seed: " + currentSong.songSeed);
+			    //System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
+			    //		"Artist seed: " + currentSong.artistSeed + "\n" +
+			    //        "Song seed: " + currentSong.songSeed);
 
-			    CancerSounds player = new CancerSounds(currentSong.previewURL);
+			    SoundPlayer player = new SoundPlayer(currentSong.previewURL);
 			    player.play();
 			    }
 			
@@ -66,7 +66,7 @@ public class MusicThread extends Thread {
 
 	public void playSong(String url) {
 		
-		CancerSounds c = new CancerSounds(url);
+		SoundPlayer c = new SoundPlayer(url);
 		c.play();
 	}
 }

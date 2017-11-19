@@ -13,11 +13,11 @@ import javazoom.jl.player.Player;
  * @author benwh
  *
  */
-public class CancerSounds{
+public class SoundPlayer{
 	
 	private String mp3Url; 
 	
-	public CancerSounds(String mp3String) {
+	public SoundPlayer(String mp3String) {
 		
 		mp3Url = mp3String;		
 	}

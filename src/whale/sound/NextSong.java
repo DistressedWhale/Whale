@@ -2,7 +2,6 @@ package whale.sound;
 
 import com.mashape.unirest.http.Unirest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.lang.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Base64.Encoder;
@@ -63,7 +62,7 @@ public class NextSong {
                 "seed_artists=" + song.artistSeed + "&" +
                 "limit=1&";
        // System.out.println(myURL);
-       // System.out.println("Energy: "+energyValue.toString()+"Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
+        System.out.println("Searching for related, previewable song with values Energy: "+energyValue.toString()+" Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
         
         return Unirest.get(myURL)
                 .header("Authorization", "Bearer " + OAuth)
