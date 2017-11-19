@@ -55,7 +55,7 @@ public class Main {
 				main.prev = d;
 			}
 			
-			System.out.println(d.toString());
+			System.out.println("Stock Value: "+d.toString());
 			main.total += d;
 			main.dataPoints ++;
 		} catch (InterruptedException e) {
