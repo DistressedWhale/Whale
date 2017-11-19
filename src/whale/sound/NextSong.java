@@ -4,24 +4,22 @@ import java.lang.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Base64.Encoder;
-import java.util.Scanner;
 
 
 public class NextSong {
     //ID and password for Auth
     private static final String ID = "1f60082d34864c39b752ace10f5ff00d";
     private static final String Secret = "b933f2341509494da1a6e878e0338e5e";
-
+    public static String OAuth;
     //bare bones constructor, it only needs to know the first song and artist to get rolling.
-    public NextSong(String initFirstSongID, String initFirstArtistID) {
-        String firstSongID = initFirstSongID;
-        String firstArtistID = initFirstArtistID;
+    public NextSong() throws Exception {
+        OAuth = giveMeAuth();
     }
 
     //Gets the next song, based off a song.
-    public static String giveMeNextSongInfo(SongMetadata song, String OAuth) throws Exception {
+    public String giveMeNextSongInfo(SongMetadata song) throws Exception {
         String myURL = "https://api.spotify.com/v1/recommendations?" +
-                "max_energy=0.3&" +
+                "min_energy=0.3&" +
                 "market=US&" +
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
@@ -37,7 +35,7 @@ public class NextSong {
     }
 
     //A function for auth, returning an OAuth string
-    public static String giveMeAuth() throws Exception {
+    public String giveMeAuth() throws Exception {
         //String literalDumpster = "https://requestb.in/qznm79qz";
         String myURL = "https://accounts.spotify.com/api/token";
         ObjectMapper mappyMcMapface = new ObjectMapper();
@@ -59,14 +57,14 @@ public class NextSong {
     }
 
     //Gets the song preview URL that Spotify spits out somewhere in the JSON
-    public static String stripOutPreviewURL(String inputURL) {
+    public String stripOutPreviewURL(String inputURL) {
         int startIndex = inputURL.indexOf("preview_url") + 16; //get location of preview URL
         int endIndex = inputURL.indexOf("\"", startIndex+16);
         return inputURL.substring(startIndex, endIndex);
     }
 
     //gets the recommended artist and song URLs
-    public static String[] stripOutSeeds(String inputURL) {
+    public String[] stripOutSeeds(String inputURL) {
 
         //Strip out recommended artist
         int firstHTTPIndex = inputURL.indexOf("\"spotify\" : \"https://open.spotify.com/artist");
@@ -84,41 +82,5 @@ public class NextSong {
 
         String[] wrapup = {firstSeed, secondSeed};
         return wrapup;
-    }
-
-    public static void main(String[] args) throws Exception {
-        //Get auth
-        String OAuth = giveMeAuth();
-        System.out.println("OAuth: " + OAuth);
-
-        //hardcoded initial data
-        String[] initialSeeds = {"26VFTg2z8YR0cCuwLzESi2", "44n97yHySt0Z9rqPaXgjCK"};
-        SongMetadata currentSong = new SongMetadata(initialSeeds, "");
-
-        //Some stuff for the loop
-        String userInput = "";
-        String info;
-        String previewURL;
-        String[] seeds;
-        Scanner scan = new Scanner(System.in);
-
-        //Main loop
-        while (!(userInput.equals("quit"))) {
-            info = giveMeNextSongInfo(currentSong, OAuth);
-            previewURL = stripOutPreviewURL(info);
-            seeds = stripOutSeeds(info);
-
-            currentSong = new SongMetadata(seeds, previewURL);
-
-            if (currentSong.previewURL.contains("https://p.scdn.co/mp3-preview")) {
-                System.out.println("Preview URL: " + currentSong.previewURL + "\n" +
-                        "Artist seed: " + currentSong.artistSeed + "\n" +
-                        "Song seed: " + currentSong.songSeed);
-
-                System.out.println("Another song? > ");
-                userInput = scan.nextLine();
-            }
-        }
-
     }
 }
