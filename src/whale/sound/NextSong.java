@@ -37,8 +37,9 @@ public class NextSong {
         if (maxEnergy > 1.0f) {
             maxEnergy = 1.0f;
         }
-
-        valenceValue = valenceValue * valenceChange.floatValue();
+        if(Double.isNaN(valenceChange)) valenceChange = 0.5;
+        valenceValue = valenceChange.floatValue();
+        
         Float maxValence = valenceValue + 0.1f;
         if (maxValence > 1.0f) {
             maxValence = 1.0f;
@@ -61,7 +62,9 @@ public class NextSong {
                 "seed_tracks=" + song.songSeed + "&" +
                 "seed_artists=" + song.artistSeed + "&" +
                 "limit=1&";
-
+        
+        System.out.println("Energy: "+energyValue.toString()+"Valence: " +valenceValue.toString() +" mode:" +Integer.toString(mode));
+        
         return Unirest.get(myURL)
                 .header("Authorization", "Bearer " + OAuth)
                 .header("Accept", "application/json")
