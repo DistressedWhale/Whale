@@ -9,8 +9,8 @@ import java.util.Base64.Encoder;
 
 public class NextSong {
     //ID and password for Auth
-    private static final String ID = "1f60082d34864c39b752ace10f5ff00d";
-    private static final String Secret = "b933f2341509494da1a6e878e0338e5e";
+    private static final String ID = "ENTER YOUR ID HERE";
+    private static final String Secret = "ENTER YOUR SECRET KEY HERE";
     public static String OAuth;
     public static Float energyValue = 0.5f;
     public static Float valenceValue = 0.5f;
